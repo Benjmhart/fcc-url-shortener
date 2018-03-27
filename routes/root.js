@@ -18,7 +18,7 @@ module.exports = (app, db) => {
         const abbrev = Number(req.params[0])
         //find a match through mongo and redirect, client.close()
         const match = await db.collection('link').findOne({ shortURL: abbrev })
-        if(match.length === 0){return res.send({error: '404 - no match found'})}
+        if(match === null){return res.send({error: '404 - no match found'})}
         res.redirect(match.originalURL)
     })
 }
