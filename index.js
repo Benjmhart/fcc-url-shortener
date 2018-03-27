@@ -13,7 +13,6 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json())
 mongoClient.connect(keys.mongoURL, (err, client) => {
     if(err){console.log(err)}
-    console.log('connected to mongodb!')
     const db = client.db('fcc-url-short-bhart')
     require('./routes/root')(app, db)
     require('./routes/new')(app, db)
