@@ -1,16 +1,31 @@
 const express = require('express')
 const path = require('path')
 const mongo = require('mongodb')
+const keys = require('../config/keys')
+const re =/^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/
 
-const re =/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/g
+module.exports = (app, client) => {
 
-module.exports = app => {
-    app.get('/new/:url', (req, res) => {
-        const { url } = req.params 
-        if(!re.test(url)){res.send({ error: 'url is invalid'})}
+    const db = client.db('urls')
+
+    app.get('/new/*', async (req, res) => {
+        console.log(req.params[0])
+        const url = req.params[0]
         console.log(`attempting to create a new link with url: ${url}`)
-// db access
+        if(!re.test(url)){ return res.send({ error: 'url is invalid'})}
+        const searchResults = await db.collection('link').find({ originalURL: url}).toArray()
+        if(searchResults.length > 0){
+        //if we find a previous match, respond with it
+            res.send(searchResults[0])
+        } else{
+                
+            //if there is no match, insert a new link and respond with it
+            //client.close()
+            const docs = await db.collection('link').insertOne({ originalURL: url, shortURL: await db.collection('link').count() })                       
+            const { originalURL, shortURL } = docs.ops[0]
+            const redirect = `${keys.baseURL}${shortURL}`
+            res.send({ originalURL, shortURL: redirect })
+            }
+        })
 
-        res.send('hello!')
-        res.end()
 }
