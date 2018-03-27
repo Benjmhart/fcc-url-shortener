@@ -12,9 +12,7 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json())
 
-
-
 require('./routes/root')(app)
-
+require('./routes/new')(app)
 
 app.listen(process.env.PORT || 5000)
