@@ -14,8 +14,8 @@ app.use(bodyParser.json())
 mongoClient.connect(keys.mongoURL, (err, client) => {
     if(err){console.log(err)}
     console.log('connected to mongodb!')
-    
-    require('./routes/root')(app, client)
-    require('./routes/new')(app, client)
+    const db = client.db('fcc-url-short-bhart')
+    require('./routes/root')(app, db)
+    require('./routes/new')(app, db)
 })
 app.listen(process.env.PORT || 5000)

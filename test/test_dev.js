@@ -2,8 +2,8 @@
 
 const fetch = require('node-fetch')
 const baseurl = `http://localhost:5000/`
-const url1 = `${baseurl}new/http://reddit.com/franksand`
-const url2 = `${baseurl}11`
+const url1 = `${baseurl}new/http://reddit.com`
+const url2 = `${baseurl}1`
 // test cases:  new url,  old url, broken url
 
 const getstuff = async (url) => {
@@ -14,4 +14,4 @@ const getstuff = async (url) => {
 
 const response = getstuff(url1) //?
 
-const response2 = getstuff(url2)//?
+//const response2 = getstuff(url2)//?

@@ -4,9 +4,8 @@ const mongo = require('mongodb')
 const keys = require('../config/keys')
 const re =/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/g
 
-module.exports = (app, client) => {
+module.exports = (app, db) => {
 
-    const db = client.db('urls')
 
     app.get('/', (req, res) => {
         console.log('getting a request at root')
