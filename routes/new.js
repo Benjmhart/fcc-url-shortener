@@ -25,6 +25,7 @@ module.exports = (app, client) => {
             const { originalURL, shortURL } = docs.ops[0]
             const redirect = `${keys.baseURL}${shortURL}`
             res.send({ originalURL, shortURL: redirect })
+
             }
         })
 
