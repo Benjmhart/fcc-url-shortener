@@ -1,0 +1,29 @@
+{
+  "name": "fcc-url-shortener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Benjmhart/fcc-url-shortener.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Benjmhart/fcc-url-shortener/issues"
+  },
+  "homepage": "https://github.com/Benjmhart/fcc-url-shortener#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongodb": "^3.0.5",
+    "node-fetch": "^2.1.2",
+    "nodemon": "^1.17.2"
+  }
+}
